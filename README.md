@@ -46,6 +46,8 @@ This engine splits arbitrary uploaded PDFs into localized, overlapping passages 
 
 ## 2. System Architecture & Pipeline
 
+![Semantic PDF Search Pipeline Architecture](images/pipeline_architecture_horizontal.png)
+
 The system operates across an 8-stage information retrieval pipeline:
 
 ```text
@@ -121,6 +123,8 @@ $$w_{t, d} = \text{TF}(t, d) \times \text{IDF}(t)$$
 
 Relevance between query $\mathbf{q}$ and passage $\mathbf{d}$ is the cosine of the angle between their vectors:
 $$\text{Cosine}(\mathbf{q}, \mathbf{d}) = \frac{\mathbf{q} \cdot \mathbf{d}}{\|\mathbf{q}\|_2 \times \|\mathbf{d}\|_2} = \frac{\sum_{i=1}^{|V|} q_i d_i}{\sqrt{\sum_{i=1}^{|V|} q_i^2} \times \sqrt{\sum_{i=1}^{|V|} d_i^2}}$$
+
+![Vector Space Model & Cosine Similarity Workflow](images/vector_space_model_horizontal.png)
 
 **Why Cosine Similarity over Euclidean Distance?**
 Euclidean distance measures absolute distance ($\|\mathbf{q} - \mathbf{d}\|$), heavily penalizing longer documents that contain more total words. Cosine similarity normalizes vector lengths to unit length, evaluating strictly **topical orientation**, not passage length.
@@ -298,6 +302,8 @@ If a user searches for `"heart attack"`:
 
 ### 9.2 The Polysemy Problem
 The word `"bank"` can represent a financial institution or a riverbank. In TF-IDF, both usages receive the exact same vector coordinate.
+
+![Information Retrieval Evolution to RAG](images/ir_evolution_rag_horizontal.png)
 
 ### 9.3 Paradigm Comparison Table
 
